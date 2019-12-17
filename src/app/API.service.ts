@@ -12,61 +12,6 @@ export type CreateHeroInput = {
   status?: boolean | null;
 };
 
-export type ModelHeroConditionInput = {
-  name?: ModelStringInput | null;
-  power?: ModelStringInput | null;
-  status?: ModelBooleanInput | null;
-  and?: Array<ModelHeroConditionInput | null> | null;
-  or?: Array<ModelHeroConditionInput | null> | null;
-  not?: ModelHeroConditionInput | null;
-};
-
-export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null"
-}
-
-export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-};
-
 export type UpdateHeroInput = {
   id: string;
   name?: string | null;
@@ -79,16 +24,16 @@ export type DeleteHeroInput = {
 };
 
 export type ModelHeroFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  power?: ModelStringInput | null;
-  status?: ModelBooleanInput | null;
+  id?: ModelIDFilterInput | null;
+  name?: ModelStringFilterInput | null;
+  power?: ModelStringFilterInput | null;
+  status?: ModelBooleanFilterInput | null;
   and?: Array<ModelHeroFilterInput | null> | null;
   or?: Array<ModelHeroFilterInput | null> | null;
   not?: ModelHeroFilterInput | null;
 };
 
-export type ModelIDInput = {
+export type ModelIDFilterInput = {
   ne?: string | null;
   eq?: string | null;
   le?: string | null;
@@ -99,9 +44,24 @@ export type ModelIDInput = {
   notContains?: string | null;
   between?: Array<string | null> | null;
   beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
+};
+
+export type ModelStringFilterInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+};
+
+export type ModelBooleanFilterInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
 };
 
 export type SearchableHeroFilterInput = {
@@ -214,7 +174,6 @@ export type SearchHerosQuery = {
     status: boolean | null;
   } | null> | null;
   nextToken: string | null;
-  total: number | null;
 };
 
 export type OnCreateHeroSubscription = {
@@ -245,12 +204,9 @@ export type OnDeleteHeroSubscription = {
   providedIn: "root"
 })
 export class APIService {
-  async CreateHero(
-    input: CreateHeroInput,
-    condition?: ModelHeroConditionInput
-  ): Promise<CreateHeroMutation> {
-    const statement = `mutation CreateHero($input: CreateHeroInput!, $condition: ModelHeroConditionInput) {
-        createHero(input: $input, condition: $condition) {
+  async CreateHero(input: CreateHeroInput): Promise<CreateHeroMutation> {
+    const statement = `mutation CreateHero($input: CreateHeroInput!) {
+        createHero(input: $input) {
           __typename
           id
           name
@@ -261,20 +217,14 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateHeroMutation>response.data.createHero;
   }
-  async UpdateHero(
-    input: UpdateHeroInput,
-    condition?: ModelHeroConditionInput
-  ): Promise<UpdateHeroMutation> {
-    const statement = `mutation UpdateHero($input: UpdateHeroInput!, $condition: ModelHeroConditionInput) {
-        updateHero(input: $input, condition: $condition) {
+  async UpdateHero(input: UpdateHeroInput): Promise<UpdateHeroMutation> {
+    const statement = `mutation UpdateHero($input: UpdateHeroInput!) {
+        updateHero(input: $input) {
           __typename
           id
           name
@@ -285,20 +235,14 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateHeroMutation>response.data.updateHero;
   }
-  async DeleteHero(
-    input: DeleteHeroInput,
-    condition?: ModelHeroConditionInput
-  ): Promise<DeleteHeroMutation> {
-    const statement = `mutation DeleteHero($input: DeleteHeroInput!, $condition: ModelHeroConditionInput) {
-        deleteHero(input: $input, condition: $condition) {
+  async DeleteHero(input: DeleteHeroInput): Promise<DeleteHeroMutation> {
+    const statement = `mutation DeleteHero($input: DeleteHeroInput!) {
+        deleteHero(input: $input) {
           __typename
           id
           name
@@ -309,9 +253,6 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
@@ -385,7 +326,6 @@ export class APIService {
             status
           }
           nextToken
-          total
         }
       }`;
     const gqlAPIServiceArguments: any = {};

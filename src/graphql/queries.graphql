@@ -41,6 +41,5 @@ query SearchHeros(
       status
     }
     nextToken
-    total
   }
 }

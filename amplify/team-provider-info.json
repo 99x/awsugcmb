@@ -16,5 +16,22 @@
                 "shield7d1e2458": {}
             }
         }
+    },
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "shield-dev-20191217163138-authRole",
+            "UnauthRoleArn": "arn:aws:iam::534288293305:role/shield-dev-20191217163138-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::534288293305:role/shield-dev-20191217163138-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "shield-dev-20191217163138-deployment",
+            "UnauthRoleName": "shield-dev-20191217163138-unauthRole",
+            "StackName": "shield-dev-20191217163138",
+            "StackId": "arn:aws:cloudformation:eu-central-1:534288293305:stack/shield-dev-20191217163138/99d1b7a0-20bc-11ea-8a5b-02012ecdd3ee"
+        },
+        "categories": {
+            "auth": {
+                "shield7d1e2458": {}
+            }
+        }
     }
 }

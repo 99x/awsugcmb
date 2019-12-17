@@ -1,4 +1,4 @@
-type Hero @model @searchable {
+type Hero @model @searchable @key(fields: ["name"]) {
   id: ID!
   name: String!
   power: String
