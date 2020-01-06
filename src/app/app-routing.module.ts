@@ -6,11 +6,16 @@ import { HeroComponent } from "./hero/hero.component";
 const routes: Routes = [
   {
     path: "",
+    pathMatch: "full",
     component: AuthComponent
   },
   {
     path: "heros",
     component: HeroComponent
+  },
+  {
+    path: "**",
+    redirectTo: ""
   }
 ];
 
@@ -18,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
