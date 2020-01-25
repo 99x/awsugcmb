@@ -31,6 +31,17 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+## Project setup
+Follow these steps to setup the project locally.
+
+1. Clone the project `$ git clone https://github.com/99xt/awsugcmb`
+3. Establish a dev server: Run `ng serve` 
+4. Navigate to `http://localhost:4200/`. 
+5. Build it!: Run `ng build`
+6. Execute the unit tests: Run `ng test` 
+7. Execute the end-to-end tests: Run `ng e2e`
+
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
