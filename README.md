@@ -1,4 +1,4 @@
-![Alt Text](awsugcmb.gif)
+![AWS user group Colombo](awsugcmb.gif)
 
 # Shield
 
