@@ -1,4 +1,6 @@
-![AWS user group Colombo](awsugcmb.gif)
+<p align="center">
+  <img width="150" height="150" src="awsugcmb.gif" />
+</p>
 
 # Shield
 
