@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150" height="150" src="awsugcmb.gif" />
+  <img width="150" height="150" src="src/assets/gif/awsugcmb-shield.gif" />
 </p>
 
 # Shield
